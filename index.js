@@ -74,6 +74,8 @@ client.on("message", message => {
         }).catch(e => {
             console.log(e);
         })
+    }else {
+        message.reply("Invalid search format!")
     }
 })
 
