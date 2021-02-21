@@ -1,9 +1,9 @@
 require('dotenv').config();
-require('./db_connection');
+//require('./db_connection');
 const discord = require('discord.js');
 const rp = require("request-promise");
 const client = new discord.Client();
-const { insertHistory,searchHistory } = require('./db_operation');
+//const { insertHistory,searchHistory } = require('./db_operation');
 
 
 client.on("message", message => {
@@ -53,7 +53,7 @@ client.on("message", message => {
         })
 
         // inserting history to the db
-        insertHistory(search_query);
+        //insertHistory(search_query);
     }
     else if (message.content.startsWith('!recent')) {
 
@@ -61,19 +61,20 @@ client.on("message", message => {
         // get the query after removing prefix and extra space
         const query = message.content.substring(7).trim();
 
+        message.reply('Search history not supported in this app please install locally!')
         // query db for history
-        let result = searchHistory(query);
+        // let result = searchHistory(query);
 
-        result.then((items) => {
-            if(items.length == 0){
-                message.reply("No search history for this keyword!");
-            }
-            items.forEach(item =>{
-                message.reply(item.search_string);
-            })
-        }).catch(e => {
-            console.log(e);
-        })
+        // result.then((items) => {
+        //     if(items.length == 0){
+        //         message.reply("No search history for this keyword!");
+        //     }
+        //     items.forEach(item =>{
+        //         message.reply(item.search_string);
+        //     })
+        // }).catch(e => {
+        //     console.log(e);
+        // })
     }
 })
 
